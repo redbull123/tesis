@@ -14,11 +14,8 @@ public class ModelItinerario {
 
     private String schedule;
 
-    public ModelItinerario(String route, String day, int puesto, String schedule) {
+    public ModelItinerario(String route) {
         this.route = route;
-        this.day = day;
-        this.puesto = puesto;
-        this.schedule = schedule;
     }
 
     public String getRoute() {
