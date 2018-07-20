@@ -43,7 +43,7 @@ public class Itinerario {
      * @param fecha
      * @param rutaId
      */
-    public Itinerario(BarcoId barcoId, String fecha, int id, RutaId rutaId, String time) {
+    public Itinerario(Barco barcoId, String fecha, int id, Ruta rutaId, String time) {
         super();
         this.barcoId = barcoId;
         this.fecha = fecha;
@@ -52,11 +52,11 @@ public class Itinerario {
         this.time = time;
     }
 
-    public BarcoId getBarcoId() {
+    public Barco getBarcoId() {
         return barcoId;
     }
 
-    public void setBarcoId(BarcoId barcoId) {
+    public void setBarcoId(Barco barcoId) {
         this.barcoId = barcoId;
     }
 
@@ -76,11 +76,11 @@ public class Itinerario {
         this.id = id;
     }
 
-    public RutaId getRutaId() {
+    public Ruta getRutaId() {
         return rutaId;
     }
 
-    public void setRutaId(RutaId rutaId) {
+    public void setRutaId(Ruta rutaId) {
         this.rutaId = rutaId;
     }
 

@@ -1,20 +1,17 @@
 package com.example.android.tesis.activity;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.android.tesis.adapter.CustomAdapter;
 import com.example.android.tesis.R;
-import com.example.android.tesis.adapter.ModelItinerarioAdapter;
 import com.example.android.tesis.model.Barco;
 import com.example.android.tesis.my_interface.APIService;
 import com.example.android.tesis.network.ApiUtils;
+import com.example.android.tesis.network.RetrofitInstance;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,20 +24,26 @@ import retrofit2.Response;
  */
 public class Schedule extends AppCompatActivity {
 
-  private ListView prueba;
-    private List<Barco> listBarco = new ArrayList<Barco>();
+    private static final String LOG_TAG = Schedule.class.getSimpleName();
+    private ListView prueba;
+    private List<Barco> listBarco = new ArrayList<>();
 
-  //  private CustomAdapter adapter;
-  //private RecyclerView recyclerView;
-  //  ProgressDialog progressDoalog;
-    private APIService APIService;
+    //  private CustomAdapter adapter;
+    //private RecyclerView recyclerView;
+    //  ProgressDialog progressDoalog;
+    private APIService apiService;
     ProgressDialog progressDoalog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_layout);
 
+        if(apiService == null) {
+            apiService = RetrofitInstance.getRetrofitInstance(ApiUtils.BASE_URL).create(APIService.class);
+        } else {
+            Log.d(LOG_TAG, "el apiService está inicializado");
+        }
 
 //
 //        progressDoalog = new ProgressDialog(Schedule.this);
@@ -49,42 +52,64 @@ public class Schedule extends AppCompatActivity {
 
         // new Peticion().execute();
 
-        APIService = ApiUtils.getAPIService();
 
-        Call<List<Barco>> lista = APIService.getBarco();
-
-//        ArrayList<ModelItinerario> iti = new ArrayList<>();
-//                    try {
-//                for (Barco barco : lista.execute().body()){
-//
-//                    //listBarco.add(new Barco(barco.getNombre(),barco.getId()));
-//                Log.e("Respuesta:    ", barco.getNombre()+ "  "+ barco.getId());
-//                    TextView textOne = (TextView) findViewById(R.id.name);
-//
-//                    textOne.setText(barco.getNombre());
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+        //apiService = ApiUtils.getAPIService();
 
 
+        Call<List<Barco>> call = apiService.doGetBarcosList();
+        Log.d(LOG_TAG, "Trajo un objeto Call de la apiService");
 
-        lista.enqueue(new Callback<List<Barco>>() {
+        call.enqueue(new Callback<List<Barco>>() {
             @Override
             public void onResponse(Call<List<Barco>> call, Response<List<Barco>> response) {
-                if(response.isSuccessful()){
+                Log.d(LOG_TAG, response.code() +  " ");
+                List<Barco> barcos = response.body();
+                for(Barco barco:barcos){
+                    Log.d(LOG_TAG, "nombre: " + barco.getNombre());
+                    Log.d(LOG_TAG, "id: " + barco.getId());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Barco>> call, Throwable t) {
+                Log.e(LOG_TAG, "fallo con " + t.getMessage());
+                call.cancel();
+            }
+        });
+
+//        ArrayList<ModelItinerario> iti = new ArrayList<>();
+        try {
+
+/*            for (Barco barco : lista.execute().body()) {
+
+                //listBarco.add(new Barco(barco.getNombre(),barco.getId()));
+                Log.e("Respuesta:    ", barco.getNombre() + "  " + barco.getId());
+                TextView textOne = (TextView) findViewById(R.id.name);
+
+                textOne.setText(barco.getNombre());
+            }*/
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        /*lista.enqueue(new Callback<List<Barco>>() {
+            @Override
+            public void onResponse(Call<List<Barco>> call, Response<List<Barco>> response) {
+                if (response.isSuccessful()) {
                     Toast.makeText(Schedule.this, "Succesfull!", Toast.LENGTH_SHORT).show();
-                     //listBarco = response.body();
+                    //listBarco = response.body();
                 }
 
             }
+
             @Override
             public void onFailure(Call<List<Barco>> call, Throwable t) {
-               // progressDoalog.dismiss();
+                // progressDoalog.dismiss();
                 Toast.makeText(Schedule.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
 
             }
-        });
+        });*/
 
 //        ModelItinerarioAdapter adapter = null;
 //        try {

@@ -13,11 +13,16 @@ public class RetrofitInstance {
 
     public static Retrofit getRetrofitInstance(String baseUrl){
 
-        if(retrofit == null){
-            Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
+        /*if(retrofit == null){
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-        }
+        }*/
+        retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         return retrofit;
     }

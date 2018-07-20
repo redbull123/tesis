@@ -12,6 +12,6 @@ import retrofit2.http.GET;
 
 public interface APIService {
 
-    @GET("CustomerDB/webresources/entities.barco")
-    Call<List<Barco>> getBarco();
+    @GET("/ConferryTesisWebApp/webresources/org.tesis.model.barco")
+    Call<List<Barco>> doGetBarcosList();
 }
