@@ -4,13 +4,17 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.android.tesis.adapter.CustomAdapter;
 import com.example.android.tesis.R;
+import com.example.android.tesis.adapter.ModelItinerarioAdapter;
 import com.example.android.tesis.model.Barco;
 import com.example.android.tesis.my_interface.APIService;
 import com.example.android.tesis.network.ApiUtils;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +27,12 @@ import retrofit2.Response;
  */
 public class Schedule extends AppCompatActivity {
 
-  //  private ListView prueba;
+  private ListView prueba;
     private List<Barco> listBarco = new ArrayList<Barco>();
 
-    private CustomAdapter adapter;
-    private RecyclerView recyclerView;
-    ProgressDialog progressDoalog;
-    private RecyclerView recyclerView;
+  //  private CustomAdapter adapter;
+  //private RecyclerView recyclerView;
+  //  ProgressDialog progressDoalog;
     private APIService APIService;
     ProgressDialog progressDoalog;
 
@@ -39,10 +42,10 @@ public class Schedule extends AppCompatActivity {
         setContentView(R.layout.schedule_layout);
 
 
-
-        progressDoalog = new ProgressDialog(Schedule.this);
-        progressDoalog.setMessage("Loading....");
-        progressDoalog.show();
+//
+//        progressDoalog = new ProgressDialog(Schedule.this);
+//        progressDoalog.setMessage("Loading....");
+//        progressDoalog.show();
 
         // new Peticion().execute();
 
@@ -70,16 +73,25 @@ public class Schedule extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Barco>> call, Response<List<Barco>> response) {
                 if(response.isSuccessful()){
-                     listBarco = response.body();
+                    Toast.makeText(Schedule.this, "Succesfull!", Toast.LENGTH_SHORT).show();
+                     //listBarco = response.body();
                 }
 
             }
             @Override
             public void onFailure(Call<List<Barco>> call, Throwable t) {
-                progressDoalog.dismiss();
+               // progressDoalog.dismiss();
                 Toast.makeText(Schedule.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
 
             }
         });
+
+//        ModelItinerarioAdapter adapter = null;
+//        try {
+//            adapter = new ModelItinerarioAdapter(this, 0, lista.execute().body() );
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        prueba.setAdapter(adapter);
     }
 }
