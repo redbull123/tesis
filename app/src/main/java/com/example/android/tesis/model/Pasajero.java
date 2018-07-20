@@ -12,7 +12,7 @@ public class Pasajero {
     private String apellido;
     @SerializedName("boletoId")
     @Expose
-    private BoletoId boletoId;
+    private Boleto boletoId;
     @SerializedName("cedulaIdentidad")
     @Expose
     private String cedulaIdentidad;
@@ -42,7 +42,7 @@ public class Pasajero {
      * @param cedulaIdentidad
      * @param fechaNacimiento
      */
-    public Pasajero(String apellido, BoletoId boletoId, String cedulaIdentidad, String fechaNacimiento, int id, String nombre) {
+    public Pasajero(String apellido, Boleto boletoId, String cedulaIdentidad, String fechaNacimiento, int id, String nombre) {
         super();
         this.apellido = apellido;
         this.boletoId = boletoId;
@@ -60,11 +60,11 @@ public class Pasajero {
         this.apellido = apellido;
     }
 
-    public BoletoId getBoletoId() {
+    public Boleto getBoletoId() {
         return boletoId;
     }
 
-    public void setBoletoId(BoletoId boletoId) {
+    public void setBoletoId(Boleto SboletoId) {
         this.boletoId = boletoId;
     }
 

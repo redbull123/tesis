@@ -19,13 +19,13 @@ public class Boleto {
     private int id;
     @SerializedName("itinerarioId")
     @Expose
-    private ItinerarioId itinerarioId;
+    private Itinerario itinerarioId;
     @SerializedName("tipoBoletoId")
     @Expose
-    private TipoBoletoId tipoBoletoId;
+    private TipoBoleto tipoBoletoId;
     @SerializedName("usuarioId")
     @Expose
-    private UsuarioId usuarioId;
+    private Usuario usuarioId;
 
     /**
      * No args constructor for use in serialization
@@ -43,13 +43,12 @@ public class Boleto {
      * @param usuarioId
      * @param itinerarioId
      */
-    public Boleto(String fecha, String hora, int id, ItinerarioId itinerarioId, TipoBoletoId tipoBoletoId, UsuarioId usuarioId) {
+    public Boleto(String fecha, String hora, int id, Itinerario itinerarioId, TipoBoleto tipoBoletoId, Usuario usuarioId) {
         super();
         this.fecha = fecha;
         this.hora = hora;
         this.id = id;
         this.itinerarioId = itinerarioId;
-        this.tipoBoletoId = tipoBoletoId;
         this.usuarioId = usuarioId;
     }
 
@@ -77,27 +76,27 @@ public class Boleto {
         this.id = id;
     }
 
-    public ItinerarioId getItinerarioId() {
+    public Itinerario getItinerarioId() {
         return itinerarioId;
     }
 
-    public void setItinerarioId(ItinerarioId itinerarioId) {
+    public void setItinerarioId(Itinerario itinerarioId) {
         this.itinerarioId = itinerarioId;
     }
 
-    public TipoBoletoId getTipoBoletoId() {
+    public TipoBoleto getTipoBoletoId() {
         return tipoBoletoId;
     }
 
-    public void setTipoBoletoId(TipoBoletoId tipoBoletoId) {
+    public void setTipoBoletoId(TipoBoleto tipoBoletoId) {
         this.tipoBoletoId = tipoBoletoId;
     }
 
-    public UsuarioId getUsuarioId() {
+    public Usuario getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(UsuarioId usuarioId) {
+    public void setUsuarioId(Usuario usuarioId) {
         this.usuarioId = usuarioId;
     }
 

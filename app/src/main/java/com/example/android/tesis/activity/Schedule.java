@@ -1,5 +1,6 @@
 package com.example.android.tesis.activity;
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -27,14 +28,10 @@ import retrofit2.Response;
  */
 public class Schedule extends AppCompatActivity {
 
-  private ListView prueba;
+    private ListView prueba;
     private List<Barco> listBarco = new ArrayList<Barco>();
+    private static APIService APIService;
 
-  //  private CustomAdapter adapter;
-  //private RecyclerView recyclerView;
-  //  ProgressDialog progressDoalog;
-    private APIService APIService;
-    ProgressDialog progressDoalog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -42,56 +39,51 @@ public class Schedule extends AppCompatActivity {
         setContentView(R.layout.schedule_layout);
 
 
+        new Peticion().execute();
+
+
+
+
 //
-//        progressDoalog = new ProgressDialog(Schedule.this);
-//        progressDoalog.setMessage("Loading....");
-//        progressDoalog.show();
-
-        // new Peticion().execute();
-
-        APIService = ApiUtils.getAPIService();
-
-        Call<List<Barco>> lista = APIService.getBarco();
-
-//        ArrayList<ModelItinerario> iti = new ArrayList<>();
-//                    try {
-//                for (Barco barco : lista.execute().body()){
-//
-//                    //listBarco.add(new Barco(barco.getNombre(),barco.getId()));
-//                Log.e("Respuesta:    ", barco.getNombre()+ "  "+ barco.getId());
-//                    TextView textOne = (TextView) findViewById(R.id.name);
-//
-//                    textOne.setText(barco.getNombre());
+//       / lista.enqueue(new Callback<List<Barco>>() {
+//            @Override
+//            public void onResponse(Call<List<Barco>> call, Response<List<Barco>> response) {
+//                if(response.isSuccessful()){
+//                    Toast.makeText(Schedule.this, "Succesfull!", Toast.LENGTH_SHORT).show();
 //                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
+//
 //            }
+//            @Override
+//            public void onFailure(Call<List<Barco>> call, Throwable t) {
+//                Toast.makeText(Schedule.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
-
-
-        lista.enqueue(new Callback<List<Barco>>() {
-            @Override
-            public void onResponse(Call<List<Barco>> call, Response<List<Barco>> response) {
-                if(response.isSuccessful()){
-                    Toast.makeText(Schedule.this, "Succesfull!", Toast.LENGTH_SHORT).show();
-                     //listBarco = response.body();
-                }
-
-            }
-            @Override
-            public void onFailure(Call<List<Barco>> call, Throwable t) {
-               // progressDoalog.dismiss();
-                Toast.makeText(Schedule.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-//        ModelItinerarioAdapter adapter = null;
-//        try {
-//            adapter = new ModelItinerarioAdapter(this, 0, lista.execute().body() );
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        prueba.setAdapter(adapter);
     }
+
+
+    public static class Peticion extends AsyncTask<Void, Void, Void>{
+
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            APIService = ApiUtils.getAPIService();
+
+            Call<List<Barco>> lista = APIService.getBarco();
+
+            try {
+                for(Barco barco : lista.execute().body()){
+                    Log.e("Respuesta : ", barco.getId()+"  "+ barco.getNombre());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            return null;
+        }
+    }
+
+
 }
