@@ -6,40 +6,58 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import com.example.android.tesis.R;
+import com.example.android.tesis.activity.Schedule;
 import com.example.android.tesis.model.Barco;
+import com.example.android.tesis.model.Itinerario;
+import com.example.android.tesis.model.Ruta;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by rjsan on 5/13/2018.
  */
 
-public class ModelItinerarioAdapter extends ArrayAdapter<Barco>{
+public class ModelItinerarioAdapter extends ArrayAdapter<Itinerario>{
 
 
+    public ModelItinerarioAdapter(Context scheduleClass, int resource, List<Itinerario> listItinerario) {
 
+        super(scheduleClass, resource, listItinerario);
 
-    public ModelItinerarioAdapter(Context scheduleClass, int resource, List<Barco> listBarco) {
-        super(scheduleClass, resource, listBarco);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
 
-
         View listItemView = convertView;
 
         if(listItemView == null) {
+
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.model_layout, parent, false);
         }
 
-        Barco currentWork = getItem(position);
+        Itinerario currentWork = getItem(position);
 
         TextView textOne = (TextView) listItemView.findViewById(R.id.name);
 
-        textOne.setText(currentWork.getNombre());
+        textOne.setText(currentWork.getBarcoId().getNombre());
+
+
+        TextView textTwo = (TextView) listItemView.findViewById(R.id.fecha);
+
+        textTwo.setText(currentWork.getFecha());
+
+        TextView textThree = (TextView) listItemView.findViewById(R.id.ruta);
+
+        textThree.setText(currentWork.getRutaId().getRuta());
+
+
+        TextView textFour = (TextView) listItemView.findViewById(R.id.time);
+
+        textFour.setText(currentWork.getTime());
 
 
         return listItemView;

@@ -42,7 +42,6 @@ public class Usuario {
     /**
      *
      * @param nombre
-     * @param id
      * @param apellido
      * @param usuario
      * @param status
@@ -50,11 +49,9 @@ public class Usuario {
      * @param ci
      * @param password
      */
-    public Usuario(String apellido, int ci, int id, String nombre, String password, String perfil, int status, String usuario) {
-        super();
+    public Usuario(String apellido, int ci, String nombre, String password, String perfil, int status, String usuario) {
         this.apellido = apellido;
         this.ci = ci;
-        this.id = id;
         this.nombre = nombre;
         this.password = password;
         this.perfil = perfil;
@@ -126,4 +123,17 @@ public class Usuario {
         this.usuario = usuario;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "apellido='" + apellido + '\'' +
+                ", ci=" + ci +
+                ", id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", password='" + password + '\'' +
+                ", perfil='" + perfil + '\'' +
+                ", status=" + status +
+                ", usuario='" + usuario + '\'' +
+                '}';
+    }
 }

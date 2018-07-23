@@ -2,9 +2,9 @@ package com.example.android.tesis.model;
 
 /**
  * Created by rjsan on 7/20/2018.
- */import com.google.gson.annotations.Expose;
+ */
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 public class Pasajero {
 
     @SerializedName("apellido")
@@ -64,7 +64,7 @@ public class Pasajero {
         return boletoId;
     }
 
-    public void setBoletoId(Boleto SboletoId) {
+    public void setBoletoId(Boleto boletoId) {
         this.boletoId = boletoId;
     }
 

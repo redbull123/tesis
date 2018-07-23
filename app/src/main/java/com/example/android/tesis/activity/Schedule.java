@@ -1,21 +1,17 @@
 package com.example.android.tesis.activity;
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.android.tesis.adapter.CustomAdapter;
 import com.example.android.tesis.R;
 import com.example.android.tesis.adapter.ModelItinerarioAdapter;
-import com.example.android.tesis.model.Barco;
+import com.example.android.tesis.model.Itinerario;
 import com.example.android.tesis.my_interface.APIService;
 import com.example.android.tesis.network.ApiUtils;
+import com.example.android.tesis.network.RetrofitInstance;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,62 +24,38 @@ import retrofit2.Response;
  */
 public class Schedule extends AppCompatActivity {
 
-    private ListView prueba;
-    private List<Barco> listBarco = new ArrayList<Barco>();
-    private static APIService APIService;
-
+    private static final String LOG_TAG = Schedule.class.getSimpleName();
+    private List<Itinerario> listItinerarios = new ArrayList<>();
+    private APIService apiService;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_layout);
 
-
-        new Peticion().execute();
-
-
-
-
-//
-//       / lista.enqueue(new Callback<List<Barco>>() {
-//            @Override
-//            public void onResponse(Call<List<Barco>> call, Response<List<Barco>> response) {
-//                if(response.isSuccessful()){
-//                    Toast.makeText(Schedule.this, "Succesfull!", Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//            @Override
-//            public void onFailure(Call<List<Barco>> call, Throwable t) {
-//                Toast.makeText(Schedule.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-
-    }
-
-
-    public static class Peticion extends AsyncTask<Void, Void, Void>{
-
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            APIService = ApiUtils.getAPIService();
-
-            Call<List<Barco>> lista = APIService.getBarco();
-
-            try {
-                for(Barco barco : lista.execute().body()){
-                    Log.e("Respuesta : ", barco.getId()+"  "+ barco.getNombre());
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            return null;
+        if(apiService == null) {
+            apiService = RetrofitInstance.getRetrofitInstance(ApiUtils.BASE_URL).create(APIService.class);
+        } else {
+            Log.d(LOG_TAG, "el apiService está inicializado");
         }
+
+        Call<List<Itinerario>> call = apiService.doGetItinerariosList();
+        //Log.d(LOG_TAG, "Trajo un objeto Call de la apiService");
+
+        call.enqueue(new Callback<List<Itinerario>>() {
+            @Override
+            public void onResponse(Call<List<Itinerario>> call, Response<List<Itinerario>> response) {
+                Log.d(LOG_TAG, response.code() +  " ");
+                listItinerarios = response.body();
+                ListView prueba = (ListView) findViewById(R.id.list);
+                ModelItinerarioAdapter adapter = new ModelItinerarioAdapter(Schedule.this, 0, listItinerarios);
+                prueba.setAdapter(adapter);}
+
+            @Override
+            public void onFailure(Call<List<Itinerario>> call, Throwable t) {
+                Log.e(LOG_TAG, "fallo con " + t.getMessage());
+                call.cancel();
+            }
+        });
     }
-
-
 }

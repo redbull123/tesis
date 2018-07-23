@@ -53,6 +53,11 @@
                 android:text="DIRECCION"
                 android:layout_marginTop="30dp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="USUARIO"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,27 +72,39 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <EditText
+                android:id="@+id/ingName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ingrese nombre"/>
 
             <EditText
+                android:id="@+id/ingLast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ingrese apellido"/>
             <EditText
+                android:id="@+id/ingCi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ingrese C.I."/>
             <EditText
+                android:id="@+id/ingEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ingrese Correo"/>
             <EditText
+                android:id="@+id/ingAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ingrese Direccion"/>
             <EditText
+                android:id="@+id/ingUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingrese Username"/>
+
+            <EditText
+                android:id="@+id/ingPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ingrese Contraseña"/>
@@ -105,9 +122,12 @@
             android:text="CANCELAR"
             android:onClick="cancelar"/>
         <Button
+            android:id="@+id/reg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="INGRESAR"/>
+            android:text="REGISTRAR"
+            android:onClick="registrarUsuario"
+            />
     </LinearLayout>
 
 </LinearLayout>
