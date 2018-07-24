@@ -1,7 +1,9 @@
 package com.example.android.tesis.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -70,12 +72,13 @@ public class Register extends AppCompatActivity {
         EditText userNameText   = (EditText)findViewById(R.id.ingPass);
         usuario = userNameText.getText().toString();
 
+
         EditText passwordText   = (EditText)findViewById(R.id.ingPass);
         password = passwordText.getText().toString();
 
 
 
-        Usuario user = new Usuario(lastName, ci, name, password, "op", 1, usuario);
+        Usuario user = new Usuario(lastName, ci, name, usuario, "us", 1, password);
 
         Log.d(LOG_TAG, "Genero este usuario: " + user.getNombre() + user.getApellido());
 
@@ -104,12 +107,34 @@ public class Register extends AppCompatActivity {
                 call.cancel();
             }
         });
+
+        PopUp();
     }
+
+
+
+
+    public void PopUp(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Usuario creado con Exito!!")
+                .setTitle("NOTIFICACION")
+                .setCancelable(false)
+                .setNeutralButton("Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                Intent route = new Intent(Register.this, MainActivity.class);
+                                startActivity(route);
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 
     public void cancelar(View view){
 
         Intent route = new Intent(this, MainActivity.class);
         startActivity(route);
-
     }
 }

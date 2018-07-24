@@ -43,11 +43,11 @@ public class Usuario {
      *
      * @param nombre
      * @param apellido
-     * @param usuario
+     * @param password
      * @param status
      * @param perfil
      * @param ci
-     * @param password
+     * @param usuario
      */
     public Usuario(String apellido, int ci, String nombre, String password, String perfil, int status, String usuario) {
         this.apellido = apellido;

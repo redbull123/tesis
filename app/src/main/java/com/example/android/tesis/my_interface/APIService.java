@@ -15,6 +15,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 
 /**
@@ -41,7 +42,7 @@ public interface APIService {
     @GET("/Tesis1.0/webresources/usuario")
     Call<List<Usuario>> doGetUsuariosList();
 
-    @PUT("/Tesis1.0/webresources/usuario")
+    @POST("/Tesis1.0/webresources/usuario")
     Call<Usuario> doSetUsuariosList(@Body Usuario user);
 
     @GET("/Tesis1.0/webresources/tipoboleto")
