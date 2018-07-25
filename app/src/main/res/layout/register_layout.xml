@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".activity.Register">
 
     <LinearLayout
@@ -17,117 +17,124 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="top">
+            android:layout_gravity="top"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NOMBRE"
                 android:layout_marginTop="10dp"
-                />
+                android:text="NOMBRE" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="APELLIDO"
-                android:layout_marginTop="30dp"/>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="C.I."
-                android:layout_marginTop="30dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CORREO"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                android:text="APELLIDO" />
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DIRECCION"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                android:text="C.I." />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="USUARIO"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                android:text="CORREO" />
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CONTRASEÑA"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                android:text="DIRECCION" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="USUARIO" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="CONTRASEÑA" />
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <EditText
                 android:id="@+id/ingName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ingrese nombre"/>
+                android:hint="Ingrese nombre" />
 
             <EditText
                 android:id="@+id/ingLast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ingrese apellido"/>
+                android:hint="Ingrese apellido" />
+
             <EditText
                 android:id="@+id/ingCi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ingrese C.I."/>
+                android:hint="Ingrese C.I." />
+
             <EditText
                 android:id="@+id/ingEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ingrese Correo"/>
+                android:hint="Ingrese Correo" />
+
             <EditText
                 android:id="@+id/ingAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ingrese Direccion"/>
+                android:hint="Ingrese Direccion" />
+
             <EditText
                 android:id="@+id/ingUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ingrese Username"/>
+                android:hint="Ingrese Username" />
 
             <EditText
                 android:id="@+id/ingPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ingrese Contraseña"/>
+                android:hint="Ingrese Contraseña" />
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="20dp">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CANCELAR"
-            android:onClick="cancelar"/>
+            android:onClick="cancelar"
+            android:text="CANCELAR" />
+
         <Button
             android:id="@+id/reg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="REGISTRAR"
             android:onClick="registrarUsuario"
-            />
+            android:text="REGISTRAR" />
     </LinearLayout>
 
 </LinearLayout>

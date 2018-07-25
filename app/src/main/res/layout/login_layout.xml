@@ -1,46 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorprimarylight"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".activity.Login">
-
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"/>
+        android:text="Login" />
+
     <EditText
-        android:id="@+id/edittext1"
-        android:layout_width="wrap_content"
+        android:id="@+id/user"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:background="@color/text_icons"
         android:hint="Ingrese Usuario"
         android:inputType="textMultiLine"
-        tools:ignore="InvalidId" />
+        android:padding="5sp"
+        android:textStyle="italic"
+        tools:ignore="InvalidId"
+        android:gravity="center"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password"/>
+
     <EditText
-        android:id="@+id/edittext2"
-        android:layout_width="wrap_content"
+        android:id="@+id/pass"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:background="@color/text_icons"
         android:hint="Ingrese contraseña"
-        android:inputType="textMultiLine"
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:padding="5sp"
+        android:textStyle="italic"
         tools:ignore="InvalidId" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Olvido su contraseña?"/>
+        android:text="Olvido su contraseña?"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:onClick="input"
+        android:text="@string/text_3_login" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registrar"/>
+        android:text="Registrar" />
 </LinearLayout>

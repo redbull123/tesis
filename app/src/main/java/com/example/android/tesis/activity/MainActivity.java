@@ -3,6 +3,7 @@ package com.example.android.tesis.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,21 +16,50 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    public void schedule(View view){
-        Intent iti = new Intent(this, Schedule.class);
-        startActivity(iti);
-    }
+        View schedule = findViewById(R.id.itine);
+        schedule.setOnClickListener(new View.OnClickListener() {
 
-    public void register(View view){
-        Intent iti = new Intent(this, Register.class);
-        startActivity(iti);
-    }
+            @Override
+            public void onClick(View v) {
 
-    public void login(View view){
-        Intent iti = new Intent(this, Login.class);
-        startActivity(iti);
+                Intent iti = new Intent(MainActivity.this, Schedule.class);
+                startActivity(iti);
+            }
+        });
+
+        View register = findViewById(R.id.regis);
+        register.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent iti = new Intent(MainActivity.this, Register.class);
+                startActivity(iti);
+            }
+        });
+
+        View login = findViewById(R.id.log);
+        login.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent iti = new Intent(MainActivity.this, Login.class);
+                startActivity(iti);
+            }
+        });
+
+//        View foru = findViewById(R.id.forum);
+//        foru.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent iti = new Intent(MainActivity.this, outSiteService.class);
+//                startActivity(iti);
+//            }
+//        });
     }
 
 }
