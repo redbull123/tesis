@@ -27,13 +27,11 @@ public class TipoBoleto {
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public TipoBoleto() {
     }
 
     /**
-     *
      * @param nombre
      * @param id
      * @param precio

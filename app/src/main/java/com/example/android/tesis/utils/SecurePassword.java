@@ -1,4 +1,4 @@
-package com.example.android.tesis;
+package com.example.android.tesis.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -9,13 +9,12 @@ import java.security.NoSuchAlgorithmException;
 
 public final class SecurePassword {
 
-    /**
-     * Para evitar la instanciacion de esta clase
-     */
-    public SecurePassword(){}
+    public SecurePassword() {
+    }
 
     /**
      * Clase usada para encriptar el password del usuario
+     *
      * @param passwordToHash
      * @return
      */

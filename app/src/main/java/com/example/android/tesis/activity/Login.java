@@ -8,16 +8,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import com.example.android.tesis.R;
-import com.example.android.tesis.SecurePassword;
+import com.example.android.tesis.utils.SecurePassword;
 import com.example.android.tesis.model.Usuario;
 import com.example.android.tesis.my_interface.APIService;
 import com.example.android.tesis.network.ApiUtils;
 import com.example.android.tesis.network.RetrofitInstance;
+
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 /**
  * Created by rjsan on 7/5/2018.
  */
@@ -30,6 +35,18 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+
+        TextView forgetPassword = (TextView) findViewById(R.id.forgetPassword);
+
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent iti = new Intent(Login.this, PerfilPrueba.class);
+                startActivity(iti);
+            }
+        });
     }
 
     public void input(View view) {
@@ -45,26 +62,8 @@ public class Login extends AppCompatActivity {
         EditText passText = (EditText) findViewById(R.id.pass);
         password = passText.getText().toString();
 
-        int conteoPalabras = 0;
-        boolean palabra = false;
-        int finDeLinea = user.length() - 1;
 
-        for (int i = 0; i < user.length(); i++) {
-            // Si el char is una letra, word = true.
-            if (Character.isLetter(user.charAt(i)) && i != finDeLinea) {
-                palabra = true;
-                // Si el char no es una letra y aún hay más letras,
-                // el contador continua.
-            } else if (!Character.isLetter(user.charAt(i)) && palabra) {
-                conteoPalabras++;
-                palabra = false;
-                // última palabra de la cadena; si no termina con una no letra ,
-            } else if (Character.isLetter(user.charAt(i)) && i == finDeLinea) {
-                conteoPalabras++;
-            }
-        }
-
-        if (conteoPalabras >= 2) {
+        if (conteoPalabrasEspacio(user) >= 2) {
             PopUp("No se puede ingresar un usuario con espacios");
         }
 
@@ -95,6 +94,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
                 int flag = 0;
+
                 for (Usuario userRec : response.body()) {
 
                     if (user.equals(userRec.getUsuario())) {
@@ -107,14 +107,14 @@ public class Login extends AppCompatActivity {
                 }
                 if (flag == 2) {
                     Log.i(LOG_TAG, "Login correcto");
-                    Intent iti = new Intent(Login.this, PaginaMantenimiento.class);
+                    HomeUser.onLoggeado(1);
+                    Intent iti = new Intent(Login.this, HomeUser.class);
                     startActivity(iti);
                 } else if (flag == 1) {
                     PopUp("Password Incorrecto");
                 } else if (flag == 0) {
                     PopUp("Usuario Incorrecto");
                 }
-
             }
 
             @Override
@@ -123,6 +123,29 @@ public class Login extends AppCompatActivity {
                 call.cancel();
             }
         });
+    }
+
+    public int conteoPalabrasEspacio(String user){
+
+        int conteoPalabras = 0;
+        boolean palabra = false;
+        int finDeLinea = user.length() - 1;
+
+        for (int i = 0; i < user.length(); i++) {
+            // Si el char is una letra, word = true.
+            if (Character.isLetter(user.charAt(i)) && i != finDeLinea) {
+                palabra = true;
+                // Si el char no es una letra y aún hay más letras,
+                // el contador continua.
+            } else if (!Character.isLetter(user.charAt(i)) && palabra) {
+                conteoPalabras++;
+                palabra = false;
+                // última palabra de la cadena; si no termina con una no letra ,
+            } else if (Character.isLetter(user.charAt(i)) && i == finDeLinea) {
+                conteoPalabras++;
+            }
+        }
+        return conteoPalabras;
     }
 
     public void PopUp(String issue) {
@@ -139,4 +162,5 @@ public class Login extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
 }

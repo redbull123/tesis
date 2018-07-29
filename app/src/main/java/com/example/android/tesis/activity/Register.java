@@ -8,11 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
 import com.example.android.tesis.R;
 import com.example.android.tesis.model.Usuario;
 import com.example.android.tesis.my_interface.APIService;
 import com.example.android.tesis.network.ApiUtils;
 import com.example.android.tesis.network.RetrofitInstance;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,11 +34,11 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.register_layout);
     }
 
-    public void registrarUsuario(View view) {
+    public void registerUser(View view) {
 
         String name;
         String lastName;
-        int ci= 0;
+        int ci = 0;
         String address;
         String email;
         String usuario;
@@ -60,62 +62,69 @@ public class Register extends AppCompatActivity {
         EditText userNameText = (EditText) findViewById(R.id.ingUser);
         usuario = userNameText.getText().toString();
 
-
         EditText passwordText = (EditText) findViewById(R.id.ingPass);
         password = passwordText.getText().toString();
 
 
-        if(!name.equals("") && !lastName.equals("") && ci != 0 && !address.equals("") &&
-                !email.equals("") && !usuario.equals("") && !password.equals("")){
-        Usuario user = new Usuario(lastName, ci, name, password, "us", 1, usuario);
+        if (!name.equals("") && !lastName.equals("") && ci != 0 && !address.equals("") &&
+                !email.equals("") && !usuario.equals("") && !password.equals("")) {
 
-        if (apiService == null) {
-            apiService = RetrofitInstance.getRetrofitInstance(ApiUtils.BASE_URL).create(APIService.class);
-        } else {
-            Log.d(LOG_TAG, "el apiService está inicializado");
+            Usuario user = new Usuario(lastName, ci, name, password, "us", 1, usuario);
+
+            if (apiService == null) {
+                apiService = RetrofitInstance.getRetrofitInstance(ApiUtils.BASE_URL).create(APIService.class);
+            } else {
+                Log.d(LOG_TAG, "el apiService está inicializado");
+            }
+
+            Call<Usuario> call = apiService.doSetUsuariosList(user);
+            call.enqueue(new Callback<Usuario>() {
+
+                @Override
+                public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                    Log.i(LOG_TAG, "post submitted to API.");
+                }
+
+                @Override
+                public void onFailure(Call<Usuario> call, Throwable t) {
+                    Log.e(LOG_TAG, "fallo con " + t.getMessage());
+                    call.cancel();
+                }
+            });
+
+            PopUp();
         }
 
-        Call<Usuario> call = apiService.doSetUsuariosList(user);
-        call.enqueue(new Callback<Usuario>() {
-
-            @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                Log.i(LOG_TAG, "post submitted to API.");
-            }
-
-            @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
-                Log.e(LOG_TAG, "fallo con " + t.getMessage());
-                call.cancel();
-            }
-        });
-        PopUp();}
-
-        if(name.equals("")){
+        if (name.equals("")) {
             Log.d(LOG_TAG, "El Nombre es null");
         }
 
-        if(lastName.equals("")){
+        if (lastName.equals("")) {
             Log.d(LOG_TAG, "El Apellido es null");
         }
-        if(ci == 0){
+        if (ci == 0) {
             Log.d(LOG_TAG, "El Cedula es null");
         }
-        if(address.equals("")){
+        if (address.equals("")) {
             Log.d(LOG_TAG, "El Direccion es null");
         }
-        if(email.equals("")){
+        if (email.equals("")) {
             Log.d(LOG_TAG, "El Correo es null");
         }
-        if(usuario.equals("")){
+        if (usuario.equals("")) {
             Log.d(LOG_TAG, "El usuario es null");
         }
-        if(password.equals("")){
+        if (password.equals("")) {
             Log.d(LOG_TAG, "El Contrasena es null");
         }
 
     }
 
+    public void register(Usuario user) {
+
+
+
+    }
 
     public void PopUp() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -133,9 +142,11 @@ public class Register extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
     public void cancelar(View view) {
 
         Intent route = new Intent(this, MainActivity.class);
         startActivity(route);
     }
+
 }

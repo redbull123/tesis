@@ -18,4 +18,33 @@
     <string name="image_1_Main">ITINERARIO</string>
     <string name="title_1_Main">CONFERRY</string>
     <string name="text_3_login">Ingresar a ConferryAPP</string>
+    <string name="text_3_Main">LOGIN</string>
+    <string name="text_4_Main">FORUM</string>
+    <string name="text_5_Main">REGISTRAR</string>
+    <string name="text_1_Register">NOMBRE</string>
+    <string name="text_2_Register">APELLIDO</string>
+    <string name="text_3_Register">C.I.</string>
+    <string name="text_4_Register">CORREO</string>
+    <string name="text_5_Register">DIRECCION</string>
+    <string name="text_6_Register">USUARIO</string>
+    <string name="text_7_Register">CONTRASEÑA</string>
+
+
+    <string name="edit_text_1_Register">INGRESE NOMBRE</string>
+    <string name="edit_text_2_Register">INGRESE APELLIDO</string>
+    <string name="edit_text_3_Register">INGRESE C.I.</string>
+    <string name="edit_text_4_Register">INGRESE CORREO</string>
+    <string name="edit_text_5_Register">INGRESE DIRECCION</string>
+    <string name="edit_text_6_Register">INGRESE USUARIO</string>
+    <string name="edit_text_7_Register">INGRESE CONTRASEÑA</string>
+
+    <string name="button_1_Register">CANCELAR</string>
+    <string name="button_2_Register">REGISTRAR</string>
+
+    //reCAPTCHAs
+    <string name="my_site_key">6Len6mYUAAAAAEPuzmTeEHECH5OPLrzF-3xdr_VU</string>
+
+
+
+
 </resources>

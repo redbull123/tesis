@@ -6,14 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import com.example.android.tesis.R;
-import com.example.android.tesis.activity.Schedule;
-import com.example.android.tesis.model.Barco;
-import com.example.android.tesis.model.Itinerario;
-import com.example.android.tesis.model.Ruta;
 
-import java.util.ArrayList;
+import com.example.android.tesis.R;
+import com.example.android.tesis.model.Itinerario;
+
 import java.util.List;
+
+import static android.R.attr.text;
 
 
 /**
@@ -22,7 +21,8 @@ import java.util.List;
 
 public class ModelItinerarioAdapter extends ArrayAdapter<Itinerario>{
 
-
+    int conta=0;
+    String num;
     public ModelItinerarioAdapter(Context scheduleClass, int resource, List<Itinerario> listItinerario) {
 
         super(scheduleClass, resource, listItinerario);
@@ -41,24 +41,23 @@ public class ModelItinerarioAdapter extends ArrayAdapter<Itinerario>{
 
         Itinerario currentWork = getItem(position);
 
-        TextView textOne = (TextView) listItemView.findViewById(R.id.name);
 
-        textOne.setText(currentWork.getBarcoId().getNombre());
+            TextView textOne = (TextView) listItemView.findViewById(R.id.route);
 
+            textOne.setText(currentWork.getRutaId().getRuta());
 
-        TextView textTwo = (TextView) listItemView.findViewById(R.id.fecha);
+            TextView textTwo = (TextView) listItemView.findViewById(R.id.ship);
 
-        textTwo.setText(currentWork.getFecha());
-
-        TextView textThree = (TextView) listItemView.findViewById(R.id.ruta);
-
-        textThree.setText(currentWork.getRutaId().getRuta());
+            textTwo.setText(currentWork.getBarcoId().getNombre());
 
 
-        TextView textFour = (TextView) listItemView.findViewById(R.id.time);
+            TextView textThree = (TextView) listItemView.findViewById(R.id.date_ship);
 
-        textFour.setText(currentWork.getTime());
+            textThree.setText(currentWork.getFecha());
 
+            TextView textFour = (TextView) listItemView.findViewById(R.id.time_ship);
+
+            textFour.setText(currentWork.getTime());
 
         return listItemView;
     }

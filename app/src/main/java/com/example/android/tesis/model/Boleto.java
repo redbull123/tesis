@@ -3,6 +3,7 @@ package com.example.android.tesis.model;
 /**
  * Created by rjsan on 7/20/2018.
  */
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -29,13 +30,11 @@ public class Boleto {
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public Boleto() {
     }
 
     /**
-     *
      * @param id
      * @param hora
      * @param fecha

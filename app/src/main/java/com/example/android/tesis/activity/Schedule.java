@@ -1,8 +1,11 @@
 package com.example.android.tesis.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.android.tesis.R;
@@ -33,23 +36,23 @@ public class Schedule extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_layout);
 
-        if(apiService == null) {
+        if (apiService == null) {
             apiService = RetrofitInstance.getRetrofitInstance(ApiUtils.BASE_URL).create(APIService.class);
         } else {
             Log.d(LOG_TAG, "el apiService está inicializado");
         }
 
         Call<List<Itinerario>> call = apiService.doGetItinerariosList();
-        //Log.d(LOG_TAG, "Trajo un objeto Call de la apiService");
 
         call.enqueue(new Callback<List<Itinerario>>() {
             @Override
             public void onResponse(Call<List<Itinerario>> call, Response<List<Itinerario>> response) {
-                Log.d(LOG_TAG, response.code() +  " ");
+                Log.d(LOG_TAG, response.code() + " ");
                 listItinerarios = response.body();
-                ListView prueba = (ListView) findViewById(R.id.list);
+                ListView listView = (ListView) findViewById(R.id.list);
                 ModelItinerarioAdapter adapter = new ModelItinerarioAdapter(Schedule.this, 0, listItinerarios);
-                prueba.setAdapter(adapter);}
+                listView.setAdapter(adapter);
+            }
 
             @Override
             public void onFailure(Call<List<Itinerario>> call, Throwable t) {
@@ -57,5 +60,24 @@ public class Schedule extends AppCompatActivity {
                 call.cancel();
             }
         });
+
+        ListView list = (ListView) findViewById(R.id.list);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                if (HomeUser.ifLoggeado() == 1) {
+                    Intent iti = new Intent(Schedule.this, PerfilPrueba.class);
+                    startActivity(iti);
+                } else if (HomeUser.ifLoggeado() == 0) {
+                    Intent iti = new Intent(Schedule.this, Login.class);
+                    startActivity(iti);
+                }
+
+            }
+        });
+
     }
+
 }

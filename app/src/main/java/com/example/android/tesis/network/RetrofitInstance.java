@@ -11,7 +11,7 @@ public class RetrofitInstance {
 
     private static Retrofit retrofit = null;
 
-    public static Retrofit getRetrofitInstance(String baseUrl){
+    public static Retrofit getRetrofitInstance(String baseUrl) {
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)

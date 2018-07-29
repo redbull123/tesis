@@ -3,11 +3,9 @@ package com.example.android.tesis.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.widget.Toast;
-
 import com.example.android.tesis.R;
+import com.example.android.tesis.utils.PruebaCapchat;
 
 
 public class MainActivity extends Activity {
@@ -50,16 +48,16 @@ public class MainActivity extends Activity {
             }
         });
 
-//        View foru = findViewById(R.id.forum);
-//        foru.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent iti = new Intent(MainActivity.this, outSiteService.class);
-//                startActivity(iti);
-//            }
-//        });
+        View foru = findViewById(R.id.forum);
+        foru.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent iti = new Intent(MainActivity.this, PruebaCapchat.class);
+                startActivity(iti);
+            }
+        });
     }
 
 }
